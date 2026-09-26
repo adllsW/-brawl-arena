@@ -1,39 +1,45 @@
-name: Build APK
+name: Build Android APK
 
 on:
   push:
-    branches: [ main ]
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
 
       - name: Install system dependencies
         run: |
-          sudo apt-get update -y
+          sudo apt-get update
           sudo apt-get install -y \
-            git zip unzip openjdk-17-jdk python3-pip autoconf libtool \
-            pkg-config zlib1g-dev libncurses-dev cmake libffi-dev \
-            libssl-dev automake build-essential ccache
+            git zip unzip openjdk-17-jdk python3-pip \
+            autoconf libtool pkg-config zlib1g-dev \
+            libncurses5-dev libncursesw5-dev libreadline-dev \
+            libsqlite3-dev libgdbm-dev libdb5.3-dev libbz2-dev \
+            libexpat1-dev liblzma-dev tk-dev libffi-dev libssl-dev lld
 
-      - name: Install buildozer
+      - name: Install Buildozer and Cython
         run: |
-          pip install --upgrade pip
-          pip install "cython<3.0" buildozer
+          python -m pip install --upgrade pip setuptools
+          pip install "cython<3.0.0" buildozer
 
       - name: Build APK with Buildozer
         run: |
-          yes | buildozer android debug
+          buildozer -v android debug
 
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: brawl-arena-apk
