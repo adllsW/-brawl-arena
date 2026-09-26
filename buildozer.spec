@@ -15,19 +15,11 @@ source.dir = .
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,jpeg,ttf,otf,kv,json,wav,ogg,mp3
 
+# (str) Application versioning (method 1)
+version = 0.1
+
 # (list) Application requirements
-# comma separated e.g. requirements = sqlite3,kivy
 requirements = python3,kivy==2.3.0
-
-# (str) Custom source folders for requirements
-# Sets custom source for any requirement with recipes or custom wished paths
-# requirements.source.kivy = ../kivy
-
-# (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
-
-# (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = landscape
@@ -51,11 +43,9 @@ android.sdk = 33
 android.ndk = 25b
 
 # (bool) If True, then skip trying to update the Android sdk
-# This can be useful to avoid lengthy downloads if the SDK is already installed.
 android.skip_update = False
 
 # (bool) If True, then accept all SDK licenses automatically
-# This is needed for automated builds, e.g. in CI pipelines.
 android.accept_sdk_license = True
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
