@@ -19,6 +19,7 @@ source.include_exts = py,png,jpg,jpeg,ttf,otf,kv,json,wav,ogg,mp3
 version = 0.1
 
 # (list) Application requirements
+# Оставлены только чистые зависимости без netifaces
 requirements = python3,kivy==2.3.0
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
@@ -28,7 +29,7 @@ orientation = landscape
 fullscreen = 1
 
 # (list) Permissions
-#android.permissions = INTERNET
+# android.permissions = INTERNET
 
 # (int) Target Android API, should be as high as possible.
 android.api = 33
